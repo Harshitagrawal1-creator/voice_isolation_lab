@@ -1,0 +1,27 @@
+# EEND-SS project dependencies
+# Install with: pip install -r requirements.txt
+#
+# For local Mac (MPS):
+#   pip install -r requirements.txt
+#
+# For Google Colab (CUDA):
+#   pip install -r requirements.txt
+#   (torch and torchaudio are already installed on Colab — skip if version conflicts)
+
+# ── Core ML ───────────────────────────────────────────────────────────────────
+# torch==2.1.0
+# torchaudio==2.1.0
+
+# ── Audio ─────────────────────────────────────────────────────────────────────
+librosa==0.10.1
+soundfile==0.12.1
+
+# ── Data / Numeric ────────────────────────────────────────────────────────────
+numpy==1.26.4
+scipy==1.11.4
+
+# ── Visualization ─────────────────────────────────────────────────────────────
+matplotlib==3.8.2
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+tqdm==4.66.1
