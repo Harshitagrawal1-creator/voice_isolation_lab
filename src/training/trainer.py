@@ -73,7 +73,22 @@ class Trainer:
             lr=cfg.lr,
             weight_decay=cfg.weight_decay,
         )
-
+        
+        # ── resume training from checkpoint ────────────────────────────────────
+        ckpt_path = Path(cfg.output_dir) / "eend_ss_best.pth"
+        if ckpt_path.exists():
+            ckpt = torch.load(ckpt_path, map_location=self.device)
+            
+            self.model.load_state_dict(ckpt["model_state"])
+            self.optimiser.load_state_dict(ckpt["optim_state"])
+            # self.scheduler.load_state_dict(   ["scheduler_state"])
+            
+            self.best_val_loss = ckpt.get("val_loss", float("inf"))
+            self.start_epoch = ckpt.get("epoch", 0) + 1
+            
+            print(f"[Trainer] Resumed from checkpoint: epoch {ckpt['epoch']}")
+            print(f"[Trainer] Best val loss: {self.best_val_loss:.4f}")
+        
         # ── scheduler: halve LR when val loss plateaus ─────────────────────────
         self.scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
             self.optimiser,
@@ -92,6 +107,7 @@ class Trainer:
         if history_path.exists():
             with open(history_path) as f:
                 self.history = json.load(f)
+                self.start_epoch = len(self.history["train_loss"]) + 1
             print(f"[Trainer] Loaded existing history ({len(self.history['train_loss'])} epochs)")
         else:
             self.history = {
@@ -110,7 +126,7 @@ class Trainer:
         print(f"  Val batches/epoch   : {len(val_loader)}")
         print(f"  Checkpoint dir      : {self.output_dir}\n")
 
-        for epoch in range(1, self.cfg.epochs + 1):
+        for epoch in range(self.start_epoch, self.cfg.epochs + 1):
             t0 = time.time()
 
             # ── train ──────────────────────────────────────────────────────────
