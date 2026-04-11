@@ -81,7 +81,7 @@ class Trainer:
             
             self.model.load_state_dict(ckpt["model_state"])
             self.optimiser.load_state_dict(ckpt["optim_state"])
-            # self.scheduler.load_state_dict(   ["scheduler_state"])
+            # self.scheduler.load_state_dict(ckpt["scheduler_state"])
             
             self.best_val_loss = ckpt.get("val_loss", float("inf"))
             self.start_epoch = ckpt.get("epoch", 0) + 1
