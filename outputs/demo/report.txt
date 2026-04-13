@@ -3,15 +3,15 @@ EEND-SS INFERENCE REPORT
 ============================================================
 Input file      : test_0003.wav
 Duration        : 23.0s
-Checkpoint      : eend_ss_best.pth (epoch 28)
+Checkpoint      : eend_ss_best.pth (epoch 54)
 Device          : cuda
 
 ── RESULTS ──────────────────────────────────────────
 Detected speakers : 3
-SI-SDR (mean)     : 1.22 dB
-  Speaker 0       : 0.38 dB
-  Speaker 1       : 9.40 dB
-  Speaker 2       : -6.12 dB
+SI-SDR (mean)     : 1.52 dB
+  Speaker 0       : -0.17 dB
+  Speaker 1       : 10.64 dB
+  Speaker 2       : -5.92 dB
 DER               : 41.6%
   False Alarm     : 41.6%
   Missed Speech   : 0.0%
