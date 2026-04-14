@@ -19,10 +19,10 @@ class Config:
 
     # ── model architecture ─────────────────────────────────────────────────────
     # Conv-TasNet
-    N: int = 256          # encoder filters      (paper: 512 — reduce if OOM)
+    N: int = 512          # encoder filters      (paper: 512 — reduce if OOM)
     L: int = 16           # encoder kernel size
     B: int = 128          # TCN bottleneck channels
-    H: int = 256          # TCN hidden channels  (paper: 512 — reduce if OOM)
+    H: int = 512          # TCN hidden channels  (paper: 512 — reduce if OOM)
     P: int = 3            # TCN kernel size
     X: int = 8            # TCN layers per repeat
     R: int = 3            # TCN repeats
@@ -48,8 +48,8 @@ class Config:
     grad_clip:    float = 5.0
 
     # early stopping — increased patience so training isn't cut short
-    patience:     int   = 15     # was 5 — val loss oscillates so needs more patience
-    lr_patience:  int   = 5      # was 3
+    patience:     int   = 10     # was 5 — val loss oscillates so needs more patience
+    lr_patience:  int   = 3      # was 3
 
     # ── loss weights ───────────────────────────────────────────────────────────
     # Boosted diarization weight so the branch actually learns.
